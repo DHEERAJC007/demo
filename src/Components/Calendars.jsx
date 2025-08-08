@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './CalendarView.scss';
-import calendarData from '../Data/CalendarData';
+import { getCalendarData } from '../Services/BatchDataService';
 
 const weekdays = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
@@ -24,7 +24,25 @@ const statusIcons = {
 
 const Calendars = () => {
   const dates = generateNext7Days();
-  const [selectedDate, setSelectedDate] = useState(dates[2].fullDate); // default to today + 2
+  const [selectedDate, setSelectedDate] = useState(dates[2].fullDate);
+  const [calendarData, setCalendarData] = useState({});
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const data = await getCalendarData();
+        setCalendarData(data.batches);
+        setLoading(false);
+      } catch (err) {
+        setError('Failed to load calendar.');
+        setLoading(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const dataForDate = calendarData[selectedDate] || [];
 
@@ -48,7 +66,11 @@ const Calendars = () => {
         ))}
       </div>
 
-      {dataForDate.length === 0 ? (
+      {loading ? (
+        <div>Loading...</div>
+      ) : error ? (
+        <div>{error}</div>
+      ) : dataForDate.length === 0 ? (
         <div>No batches for this date.</div>
       ) : (
         dataForDate.map((batch, idx) => (

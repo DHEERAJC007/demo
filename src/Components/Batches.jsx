@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Batches.scss';
-import batchData from '../Data/BatchesData';
+// import batchData from '../Data/BatchesData';
 import getBatchData from '../Services/BatchDataService';
 
 const statusIcon = {
@@ -14,7 +14,7 @@ const Batches = () => {
   const data12 = getBatchData();
   console.log('Batch Data:', data12);
   
-  const [batchData2, setBatchData] = useState([]);
+  const [batchData, setBatchData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -22,7 +22,7 @@ const Batches = () => {
     const fetchData = async () => {
       try {
         const data = await getBatchData();
-        setBatchData(data);
+        setBatchData(data.batches);
         setLoading(false);
       } catch (err) {
         setError('Failed to load users.');
@@ -32,9 +32,6 @@ const Batches = () => {
 
     fetchData();
   }, []);
-  console.log('Batch Data:', batchData2);
-  console.log('Loading:', loading);
-  console.log('Error:', error);
 
   return (
     <div className="batch-list-container">

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './QeBatchTabs.scss';
-import { tabData } from '../Data/QeData';
+import { getQcData } from '../Services/BatchDataService';
+// import { tabData } from '../Data/QeData';
 
 const QcBatchTabs = () => {
   const [activeTab, setActiveTab] = useState('overdue');
@@ -9,7 +10,18 @@ const QcBatchTabs = () => {
   success: '✅',
   error: '❌',
   warning: '⚠️',
-};
+  };
+
+  const [tabData2, setTabData2] = useState({});
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const data = await getQcData();
+      setTabData2(data.batches);
+    };
+    fetchData();
+  }, []);
+  console.log('Tab Data:', tabData2);
 
   return (
     <div className="qe-card">
@@ -37,7 +49,7 @@ const QcBatchTabs = () => {
       </div>
 
       <div className="qe-content">
-        {tabData[activeTab].map((item, index) => (
+        {tabData2?.[activeTab]?.map((item, index) => (
           <div key={index} className="qe-item">
             <div className="left">
               <div className="top-line">
