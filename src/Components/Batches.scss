@@ -1,0 +1,109 @@
+
+.batch-list-container {
+  max-width: 500px;
+  min-width: 350px;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: auto;
+
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+
+    span {
+      font-size: 24px;
+      margin-right: 8px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: bold;
+    }
+  }
+
+  .batch-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+
+    &:last-child {
+      border-bottom: none;
+    }
+
+    .batch-info {
+      .id-status {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        .id {
+          font-weight: 600;
+        }
+
+        .status-icon {
+          font-size: 18px;
+
+          &.success {
+            color: green;
+          }
+
+          &.error {
+            color: red;
+          }
+
+          &.warning {
+            color: orange;
+          }
+        }
+      }
+
+      .batch-label {
+        color: #888;
+        margin-top: 2px;
+      }
+    }
+
+    .sla-info {
+      text-align: right;
+
+      .sla-label {
+        font-size: 11px;
+        color: #999;
+      }
+
+      .sla-badge {
+        font-size: 12px;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 12px;
+        display: inline-block;
+        margin-top: 2px;
+
+        &.danger {
+          background-color: #fddede;
+          color: #b30000;
+        }
+
+        &.warning {
+          background-color: #fff5cc;
+          color: #a68200;
+        }
+
+        &.success {
+          background-color: #d4f7dc;
+          color: #007f3b;
+        }
+      }
+    }
+
+    .product {
+      font-weight: 500;
+    }
+  }
+}

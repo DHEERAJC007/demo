@@ -1,23 +1,26 @@
-import logo from './logo.svg';
 import './App.css';
+import Batches from './Components/Batches';
+import Calendars from './Components/Calendars';
+import Dues from './Components/Dues';
+import QeBatchTabs from './Components/QeBatchTabs';
+import QcBatchTabs from './Components/QcBatchTabs';
+import Visualization from './Components/Visulization';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <div className="part1">
+        <Batches />
+        <Calendars />
+      </div>
+      <div className="part2">
+        <Dues />
+        <Visualization />
+      </div>
+      <div className="part3">
+        <QeBatchTabs />
+        <QcBatchTabs />
+      </div>
     </div>
   );
 }
